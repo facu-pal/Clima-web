@@ -1,0 +1,160 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Clima Argentina</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png"  href="img/favicon2.png">
+</head>
+<body class="dark-mode">
+
+<div class="container py-5">
+    <div class="card p-4 shadow main-card">
+        <!-- Header con Título y Controles -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h3 mb-0">
+                <i class="fas fa-cloud-sun me-2"></i>Clima Argentina
+            </h1>
+            <div class="d-flex gap-2">
+                <button id="themeToggle" class="btn btn-outline-secondary">
+                    <i class="fas fa-sun"></i>
+                </button>
+                <button id="unidad" class="btn btn-outline-secondary">°F</button>
+                <button id="geo" class="btn btn-outline-success" title="Mi ubicación">
+                    <i class="fas fa-location-arrow"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Selectores de Provincia y Localidad -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-map"></i></span>
+                    <select id="provincia" class="form-select">
+                        <option value="">Seleccionar provincia</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                    <select id="localidad" class="form-select" disabled>
+                        <option value="">Seleccionar localidad</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón Principal -->
+        <div class="d-grid mb-4">
+            <button id="buscar" class="btn btn-primary btn-lg">
+                <i class="fas fa-search me-2"></i>Buscar Clima
+            </button>
+        </div>
+
+        <!-- Clima Actual -->
+        <div id="climaActual" class="mb-4" style="display: none;">
+            <div class="card clima-card p-4 mb-3">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-center mb-3 mb-md-0">
+                        <div id="weatherAnimation" class="weather-animation mb-3">
+                            <i class="fas fa-sun weather-icon-main"></i>
+                        </div>
+                        <h2 id="temperaturaActual" class="display-1 fw-bold">-</h2>
+                        <h4 id="descripcionClima" class="mb-3">-</h4>
+                        <p id="ciudadNombre" class="h5 mb-0">-</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="detail-card">
+                                    <i class="fas fa-temperature-high detail-icon"></i>
+                                    <div>
+                                        <small>Sensación</small>
+                                        <p id="sensacionTermica" class="h5 mb-0">-</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="detail-card">
+                                    <i class="fas fa-droplet detail-icon"></i>
+                                    <div>
+                                        <small>Humedad</small>
+                                        <p id="humedad" class="h5 mb-0">-</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="detail-card">
+                                    <i class="fas fa-wind detail-icon"></i>
+                                    <div>
+                                        <small>Viento</small>
+                                        <p id="viento" class="h5 mb-0">-</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="detail-card">
+                                    <i class="fas fa-gauge detail-icon"></i>
+                                    <div>
+                                        <small>Presión</small>
+                                        <p id="presion" class="h5 mb-0">-</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Temperatura Mínima y Máxima -->
+            <div class="row g-3 mb-4">
+                <div class="col-md-6">
+                    <div class="card temp-card temp-min p-3 text-center">
+                        <i class="fas fa-temperature-low mb-2"></i>
+                        <h5>Mínima</h5>
+                        <h3 id="tempMin" class="fw-bold">-</h3>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card temp-card temp-max p-3 text-center">
+                        <i class="fas fa-temperature-high mb-2"></i>
+                        <h5>Máxima</h5>
+                        <h3 id="tempMax" class="fw-bold">-</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pronóstico 5 Días -->
+        <div id="pronosticoSection" class="mb-4" style="display: none;">
+            <h3 class="h5 mb-3">
+                <i class="fas fa-calendar-alt me-2"></i>Próximos 5 días
+            </h3>
+            <div id="forecast" class="row g-3"></div>
+        </div>
+
+        <!-- Pronóstico por Horas (se muestra al hacer clic en una card) -->
+        <div id="horasSection" class="mb-4" style="display: none;">
+            <h3 class="h5 mb-3">
+                <i class="fas fa-clock me-2"></i>Pronóstico por horas
+                <small id="fechaSeleccionada" class="text-muted ms-2"></small>
+            </h3>
+            <div id="horasContainer" class="row g-2 justify-content-center"></div>
+        </div>
+
+        <!-- Mensajes y Loading -->
+        <div id="mensajes" class="text-center mt-3"></div>
+    </div>
+
+    <!-- Animaciones de Fondo -->
+    <div id="rainEffect" class="rain-effect"></div>
+    <div id="windEffect" class="wind-effect"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

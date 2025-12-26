@@ -1,6 +1,5 @@
 # 🌤️ Clima Argentina
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
@@ -11,10 +10,6 @@ Aplicación web moderna y responsive para consultar el clima en tiempo real de c
 ## 🚀 **Demo en Vivo**
 
 🌐 **Accede a la aplicación:** [https://clima-argentina.netlify.app](https://clima-argentina.netlify.app)
-
-*(Reemplaza con tu URL real de Netlify)*
-
-## 📸 **Capturas de Pantalla**
 
 ## 📸 **Vistas de la Aplicación**
 

@@ -1,4 +1,4 @@
-const API_KEY = "4df947fdf2d5ec0fdd86638826bc477c";
+const API_KEY = "tu-key-de-openweather-aqui";
 
 // Elementos del DOM
 const provinciaSelect = document.getElementById("provincia");
